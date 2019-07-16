@@ -1,3 +1,4 @@
+choco feature enable -n allowGlobalConfirmation
 cinst -y 7zip
 cinst -y adobereader
 cinst -y googlechrome
@@ -12,7 +13,7 @@ cinst -y wireshark
 cinst -y sysinternals
 cinst -y --allowemptychecksum jq
 cinst -y --allowemptychecksum OpenSSL.Light
-cinst -y --allowemptychecksum royalts
+cinst -y --allowemptychecksum royalts-v5
 cinst -y evernote
 cinst -y evernote-chrome
 cinst -y autohotkey
@@ -32,12 +33,11 @@ cinst -y fiddler4
 cinst -y postman
 cinst -y nimbletext
 cinst -y --allowemptychecksum ilspy 
-cinst -y --allowemptychecksum linqpad4
+cinst -y --allowemptychecksum linqpad5
 cinst -y docker-for-windows
 cinst -y cloudfoundry-cli
 cinst -y kubernetes-cli
 cinst -y kubernetes-helm
-cinst -y vagrant
 cinst -y nuget.commandline
 cinst -y ngrok.portable
 cinst -y ruby -version 2.2.3 -pin --x86 -y
@@ -47,6 +47,7 @@ cinst -y wkhtmltopdf
 cinst -y sql-server-express -version 13.0.1601.5
 cinst -y sql-server-management-studio
 cinst -y sourcetree
+cinst -y exiftool
 
 . $PSScriptRoot\Refresh-EnvironmentVariables
 
