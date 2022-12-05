@@ -1,59 +1,43 @@
-choco feature enable -n allowGlobalConfirmation
-cinst -y 7zip
-cinst -y adobereader
-cinst -y googlechrome
-cinst -y jre8
-cinst -y slack
-cinst -y --ignorechecksum goodsync    
-cinst -y conemu 
-cinst -y vim 
-cinst -y curl
-cinst -y --allowemptychecksum winmerge 
-cinst -y wireshark 
-cinst -y sysinternals
-cinst -y --allowemptychecksum jq
-cinst -y --allowemptychecksum OpenSSL.Light
-cinst -y --allowemptychecksum royalts-v5
-cinst -y evernote
-cinst -y evernote-chrome
-cinst -y autohotkey
-cinst -y visualstudiocode
-cinst -y golang
-cinst -y jdk8
-cinst -y nodejs.install
-cinst -y python 
-cinst -y php 
-cinst -y --allowemptychecksum webpi 
-cinst -y kdiff3
-cinst -y git.install
-cinst -y --allowemptychecksum gitextensions
-cinst -y poshgit 
-cinst -y --allowemptychecksum windbg 
-cinst -y fiddler4
-cinst -y postman
-cinst -y nimbletext
-cinst -y --allowemptychecksum ilspy 
-cinst -y --allowemptychecksum linqpad5
-cinst -y docker-for-windows
-cinst -y cloudfoundry-cli
-cinst -y kubernetes-cli
-cinst -y kubernetes-helm
-cinst -y nuget.commandline
-cinst -y ngrok.portable
-cinst -y ruby -version 2.2.3 -pin --x86 -y
-cinst -y ruby2.devkit --x86 -y
-cinst -y jetbrainstoolbox
-cinst -y wkhtmltopdf
-cinst -y sql-server-express -version 13.0.1601.5
-cinst -y sql-server-management-studio
-cinst -y sourcetree
-cinst -y exiftool
+. $PSScriptRoot\HelperLibrary.ps1
 
-. $PSScriptRoot\Refresh-EnvironmentVariables
+Install-WingetPackage -Name "Java 8"
+Install-WingetPackage -Name "Wireshark"
+Install-WingetPackage -Name "Sysinternals Suite" -Source msstore
+Install-WingetPackage -Name "jq"
+Install-WingetPackage -Name "OpenSSL"
+Install-WingetPackage -Name "Postman.Postman"
+Install-WingetPackage -Name "Microsoft.VisualStudioCode"
+Install-WingetPackage -Name "Notepad++.Notepad++"
+Install-WingetPackage -Name "SmartBear.SoapUI"
 
-npm install -g moment
-npm install -g bower
-npm install -g gulp
+Write-StepStatus "Installing wsl kernal update"
+Invoke-WebRequest https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi -OutFile "$env:TEMP\wsl_update_x64.msi"
+msiexec /i "$env:TEMP\wsl_update_x64.msi" /passive
+Install-WingetPackage -Name "Ubuntu" -Source msstore
+Install-WingetPackage -Name "Ubuntu 18.04.5 LTS" -Source msstore
 
-Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-Install-Module -Name AzureRM -Force -SkipPublisherCheck 
+Install-WingetPackage -Name "Docker.DockerDesktop"
+Refresh-EnvironmentVariables
+
+Install-WingetPackage -Name "Microsoft.DotNet.SDK.6"
+Install-WingetPackage -Name "Microsoft.DotNet.SDK.3_1"
+Install-WingetPackage -Name "Microsoft.OpenJDK.16"
+Install-WingetPackage -Name "GoLang.Go.1.19"
+Install-WingetPackage -Name "Python.Python.3.9"
+Install-WingetPackage -Name "OpenJS.NodeJS"
+Install-WingetPackage -Name "RubyInstallerTeam.RubyWithDevKit.3.1"
+Refresh-EnvironmentVariables
+
+Install-WingetPackage -Name "LINQPad 7"
+Install-WingetPackage -Name "Microsoft.AzureCLI"
+Install-WingetPackage -Name "Amazon.AWSCLI"
+Install-WingetPackage -Name "GitKraken"
+Install-WingetPackage -Name "NuGet"
+Install-WingetPackage -Name "Microsoft.SQLServer.2019.Developer" #Installer failed with exit code: 3010
+Install-WingetPackage -Name "Microsoft.SQLServerManagementStudio"
+Install-WingetPackage -Name "ExifTool"
+Refresh-EnvironmentVariables
+
+Write-StepStatus ""
+Write-StepStatus "Installation of dev tools complete, please restart your computer before moving to the next step."
+Write-StepStatus ""
